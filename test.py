@@ -1,23 +1,22 @@
-#!/usr/bin/env python
-import pygtk
-import gtk
+#!/usr/bin/python
+from __builtin__ import staticmethod
+from gi.repository import Gtk
 
 
-class MyProgram:
- 
+class MyWindow(Gtk.Window):
     def __init__(self):
-        # create a new window
-        app_window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-        app_window.set_title("MyProgram title")
+        Gtk.Window.__init__(self, title="Hello World")
 
-        app_window.show()
-        return
+        self.button = Gtk.Button(label="Click Here")
+        self.button.connect("clicked", self.on_button_clicked)
+        self.add(self.button)
 
 
-def main():
-    gtk.main()
-    return 0
+    def on_button_clicked(self, widget):
+        print("Hello World")
 
-if __name__ == "__main__":
-    MyProgram()
-    main()
+
+win = MyWindow()
+win.connect("delete-event", Gtk.main_quit)
+win.show_all()
+Gtk.main()
